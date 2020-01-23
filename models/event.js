@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
 var Schema = mongoose.Schema;
 
@@ -13,5 +14,17 @@ var eventSchema = new Schema({
         sign_ups: [{type: Schema.Types.ObjectID, ref: 'User'}]
     }
 );
+
+eventSchema
+    .virtual('start_date_formatted')
+    .get(function () {
+        return moment(this.start_date).format('MMMM Do, YYYY');
+    });
+
+eventSchema
+    .virtual('end_date_formatted')
+    .get(function () {
+        return moment(this.end_date).format('MMMM Do, YYYY');
+    });
 
 module.exports = mongoose.model('Event', eventSchema);

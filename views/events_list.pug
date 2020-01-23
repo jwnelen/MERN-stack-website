@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1= title
+
+    ul
+        each eventItem in events_list
+            li
+                p #{eventItem.name}
+                a(href='/events/' + eventItem.id) Meer informatie
+                p test
+            hr
+
+        else
+            li There are no Events.
