@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h1 Hi, welcome on the login page
-  h1 #{message}
-  form(method='POST' action='/users/login')
-    div.form-group
-      label(for='username') Username:
-      input.form-control(type='text', placeholder='user_name' name='username' required='true')
-    div.form-group
-      label(for='password') Password:
-      input.form-control(type='password' id='password' placeholder='password' name='password')
-    button.btn.btn-primary(type='sumbit') Login
+    h1 Hi, welcome on the login page
+    if message
+        p(class='alert alert-danger') #{message}
+    form(method='POST' action='/users/login')
+        div.form-group
+            label(for='username') Username:
+            input.form-control(type='text', placeholder='user_name' name='username' required='true')
+        div.form-group
+            label(for='password') Password:
+            input.form-control(type='password' id='password' placeholder='password' name='password')
+        button.btn.btn-primary(type='sumbit') Login
