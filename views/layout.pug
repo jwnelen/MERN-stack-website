@@ -41,7 +41,7 @@ html(lang='en')
                             li
                                 a(href='/users/register') Register
                             li
-                                if !user
+                                if !currentUser
                                     a(href='/users/login') Login
                                 else
                                     a(href='/users/logout') Logout
@@ -52,7 +52,7 @@ html(lang='en')
         block footer
         footer.footer
             .container
-                if user
-                    p.text-muted User: #{user.username}
+                if currentUser
+                    p.text-muted User: #{currentUser}
                 else
                     p.text-muted Not logged in.

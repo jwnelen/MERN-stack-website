@@ -26,7 +26,7 @@ exports.index = function(req, res) {
             Genre.countDocuments({}, callback);
         }
     }, function(err, results) {
-        custom_render(res, 'index',{ title: 'Local Library Home', error: err, data: results} );
+        res.render('index', {title: 'Local Library Home', error: err, data: results});
         // res.render('index', { title: 'Local Library Home', error: err, data: results, hi: 'hi'});
     });
 };
@@ -149,7 +149,7 @@ exports.book_create_post = [
                 }
                 res.render('book_form', { title: 'Create Book',authors:results.authors, genres:results.genres, book: book, errors: errors.array() });
             });
-            return;
+
         }
         else {
             // Data from form is valid. Save book.
@@ -272,7 +272,7 @@ exports.book_update_post = [
                 }
                 res.render('book_form', { title: 'Update Book',authors: results.authors, genres: results.genres, book: book, errors: errors.array() });
             });
-            return;
+
         }
         else {
             // Data from form is valid. Update the record.
@@ -284,9 +284,3 @@ exports.book_update_post = [
         }
     }
 ];
-
-custom_render = function(res, url, object) {
-    // TODO: check session
-    object.user_name = 'hi';
-    res.render(url, object);
-};

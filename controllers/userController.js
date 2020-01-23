@@ -21,7 +21,7 @@ exports.register_post = function(req, res, next){
         } //user strategy
         passport.authenticate("local")(req, res, function(){
             console.log('goes to secret!');
-            res.redirect("/secret"); //once the user sign up
+            res.redirect("/"); //once the user sign up
         });
     });
 };
@@ -38,7 +38,7 @@ exports.login_post = function(req, res, next) {
         req.logIn(user, function(err) {
             if (err) { return next(err); }
             console.log('secret page for: ' + user.username);
-            return res.redirect('/secret');
+            return res.redirect('/');
         });
     })(req, res, next);
 };

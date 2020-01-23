@@ -25,7 +25,12 @@ exports.events_detail = function (req, res, next) {
 };
 
 exports.event_register_post = function (req, res, next) {
-    console.log('clicked button!');
-    res.send('Clicked the button');
+    // User is not signed in yet
+    if (res.locals.currentUser) {
+        console.log('locals current user: ', res.locals.currentUser);
+        res.send('Clicked the button');
+    } else {
+        res.redirect('/users/login');
+    }
 };
 
