@@ -22,6 +22,7 @@ exports.events_detail = function (req, res, next) {
             next(err)
         }
         console.log(results.event_);
+        console.log(results.event_.sign_ups[0]);
         res.render('event_detail', {eventItem: results.event_, amount_sign_ups: results.event_.sign_ups.length});
     });
 };
