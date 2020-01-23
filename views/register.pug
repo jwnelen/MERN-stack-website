@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Hi, welcome on the Register page
+  
+  form(method='POST' action='/users/register')
+    div.form-group
+      label(for='username') Name:
+      input.form-control(type='text', placeholder='Name of user' name='username' required='true' value=(undefined===user ? '' : user.name) )
+    div.form-group
+      label(for='password') Password:
+      input.form-control(type='password' id='password' placeholder='password' name='password')
+    button.btn.btn-primary(type='submit') Submit
+  
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
