@@ -1,7 +1,14 @@
 extends layout
 
 block content
-    h1 User: #{currentUser.username}
+    if(currentUser)
+        h1 #{currentUser.full_name}
+        p #{currentUser.username}
+        p #{currentUser.gender}
+        p #{currentUser.email}
+        p #{currentUser.date_of_birth}
 
-    form(method='POST')
-        button.btn.btn-primary(type='submit') Logout!
+        form(method='POST')
+            button.btn.btn-primary(type='submit') Logout!
+    else
+        p Not able to load profile!
