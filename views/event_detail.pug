@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 #{eventItem.name} (#{amount_sign_ups})
+    p #{eventItem.start_date_formatted} - #{eventItem.end_date_formatted}
+    if eventItem.location
+        p locatie: #{eventItem.location}
+    else
+        p locatie TBA!
+
+    form(method='POST')
+        button(type='submit') Inschrijven!
