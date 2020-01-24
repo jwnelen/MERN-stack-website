@@ -22,7 +22,16 @@ var createError = require('http-errors'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
     LocalStrategy = require('passport-local').Strategy;
-
+//
+// logger(function (tokens, req, res) {
+//     return [
+//         tokens.method(req, res),
+//         tokens.url(req, res),
+//         tokens.status(req, res),
+//         tokens.res(req, res, 'content-length'), '-',
+//         tokens['response-time'](req, res), 'ms'
+//     ].join(' ')
+// });
 
 var app = express();
 
@@ -59,16 +68,21 @@ app.use(session({
 }));
 
 app.use(function (req, res, next) {
-    res.locals.currentUser = req.session.userId;
+    // res.locals.currentUser = req.session.userId;
     if (req.session.userId) {
         User.findById(req.session.userId)
             .exec(function (err, user) {
                 if (!err) {
                     res.locals.currentUser = user;
+
+                } else {
+                    console.log('could not find userId');
                 }
+                next();
             });
+    } else {
+        next();
     }
-    next();
 });
 
 // setup view
