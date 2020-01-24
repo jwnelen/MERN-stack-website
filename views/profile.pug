@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1 User: #{currentUser.username}
+
+    form(method='POST')
+        button.btn.btn-primary(type='submit') Logout!

@@ -37,7 +37,7 @@ var app = express();
 
 var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/events');
-// var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 
 // Passport setup
@@ -98,7 +98,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Setup routers
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 app.use('/events', eventsRouter);
 
@@ -166,15 +166,6 @@ app.get('/logout', function (req, res, next) {
 app.get("/secret", isLoggedIn, function (req, res) {
     res.render('secret');
 });
-//
-// // custom render function to include user
-// function custom_render(file_name, req, res, object) {
-//     if (req.user) {
-//         res.render(file_name, {object, user: req.user});
-//     } else {
-//         res.render(file_name);
-//     }
-// }
 
 // Check for login
 function isLoggedIn(req, res, next) {
