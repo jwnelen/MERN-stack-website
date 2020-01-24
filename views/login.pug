@@ -4,7 +4,7 @@ block content
     h1 Hi, welcome on the login page
     if message
         p(class='alert alert-danger') #{message}
-    form(method='POST' action='/users/login')
+    form(method='POST' action='/login')
         div.form-group
             label(for='username') Username:
             input.form-control(type='text', placeholder='user_name' name='username' required='true')

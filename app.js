@@ -103,36 +103,36 @@ app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 app.use('/events', eventsRouter);
 
 // REGISTER GET
-app.get('/users/register', function (req, res, next) {
+app.get('/register', function (req, res, next) {
     res.render('register');
 });
 
 // REGISTER POST
-app.post('/users/register', function (req, res, next) {
+app.post('/register', function (req, res, next) {
     User.register(new User({username: req.body.username}), req.body.password, function (err, user) {
         if (err) {
             res.render('register', {message: err.message});
         } //user strategy
         passport.authenticate("local")(req, res, function () {
-            res.redirect("/users/login"); //once the user sign up
+            res.redirect("/login"); //once the user sign up
         });
     });
 });
 
 // LOGIN GET
-app.get('/users/login', function (req, res, next) {
+app.get('/login', function (req, res, next) {
     // custom_render('login', req, res);
     res.render('login');
 });
 
 // LOGIN POST
-app.post('/users/login', function (req, res, next) {
+app.post('/login', function (req, res, next) {
     passport.authenticate('local', {flash: true}, function (err, user, info) {
         if (err) {
             return next(err);
         }
         if (!user) {
-            return res.redirect('/users/login');
+            return res.redirect('/login');
         }
         req.logIn(user, function (err) {
             if (err) {
@@ -145,7 +145,7 @@ app.post('/users/login', function (req, res, next) {
     })(req, res, next);
 });
 
-app.get('/users/logout', function (req, res, next) {
+app.get('/logout', function (req, res, next) {
     if (req.session) {
         //delete session object
         req.session.destroy(function (err) {
@@ -153,12 +153,12 @@ app.get('/users/logout', function (req, res, next) {
                 console.log('error in destroying the session');
                 return next(err);
             } else {
-                return res.redirect("/users/login");
+                return res.redirect("/login");
             }
         });
     } else {
         console.log("no session available!!");
-        return res.redirect('/users/login');
+        return res.redirect('/login');
     }
 });
 
@@ -182,7 +182,7 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     console.log('not authenticated');
-    res.redirect("/users/login");
+    res.redirect("/login");
 }
 
 function requireLoggedIn(req, res, next) {

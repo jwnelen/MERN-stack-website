@@ -50,7 +50,7 @@ exports.event_register_post = function (req, res, next) {
                 }
             );
     } else {
-        res.redirect('/users/login');
+        res.redirect('/login');
     }
 };
 

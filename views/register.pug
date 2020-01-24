@@ -4,7 +4,7 @@ block content
     h1 Hi, welcome on the Register page
     if message
         p(class='alert alert-danger') #{message}
-    form(method='POST' action='/users/register')
+    form(method='POST' action='/register')
         div.form-group
             label(for='username') Name:
             input.form-control(type='text', placeholder='Name of user' name='username' required='true' value=(undefined === user ? '' : user.name) )
