@@ -21,7 +21,8 @@ var createError = require('http-errors'),
     passport = require('passport'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    cors = require('cors');
 //
 // logger(function (tokens, req, res) {
 //     return [
@@ -95,6 +96,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 // Setup routers
 app.use('/', indexRouter);

@@ -2,14 +2,16 @@ var Event = require('../models/event');
 var User = require('../models/user.js');
 var async = require('async');
 
-exports.index = function (req, res, next) {
+exports.index = function (req, res) {
     Event.find()
-        .exec(function (err, list_event) {
-            if (err) {
-                return next(err);
-            }
-            res.render('events_list', {title: 'Events', events_list: list_event});
-        });
+        // .exec(function (err, list_event) {
+        //     if (err) {
+        //         return next(err);
+        //     }
+        // res.render('events_list', {title: 'Events', events_list: list_event});
+        .then(users => res.json(users))
+        .catch(err => res.status(400).json("error:" + err));
+    // });
 };
 
 exports.events_detail = function (req, res, next) {
