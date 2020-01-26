@@ -1,4 +1,13 @@
 var User = require('../models/user');
+var mongoose = require('mongoose');
+
+exports.profile_user_get = function (req, res) {
+    console.log(req.params.id);
+    var id = new mongoose.Types.ObjectId(req.params.id);
+    User.find({_id: id})
+        .then(user => console.log('found user: ', user))
+        .catch(err => res.status(400).json('error: ' + err))
+};
 
 // ---- REGISTER    ------
 exports.profile_get = function (req, res) {

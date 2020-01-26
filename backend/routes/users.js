@@ -8,4 +8,6 @@ router.get('/profile', user_controller.profile_get);
 
 router.post('/profile', user_controller.profile_post);
 
+router.get('/:id', user_controller.profile_user_get);
+
 module.exports = router;
